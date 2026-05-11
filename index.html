@@ -161,6 +161,37 @@
     opacity: 0;
     animation: fadeUp 0.9s 0.35s cubic-bezier(.2,.7,.2,1) forwards;
   }
+  .banner-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    padding: 14px 22px;
+    background: var(--fire);
+    color: var(--burgundy);
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: clamp(14px, 1.2vw, 16px);
+    text-decoration: none;
+    align-self: flex-start;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    transition: transform 0.25s ease, background 0.25s ease, gap 0.25s ease;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+  .banner-cta:hover {
+    background: var(--red);
+    color: var(--cream);
+    transform: translateY(-2px);
+    gap: 18px;
+  }
+  .banner-cta svg {
+    width: 22px;
+    height: 12px;
+    transition: transform 0.25s ease;
+  }
+  .banner-cta:hover svg { transform: translateX(3px); }
 
   /* lila speech bubble on banner - a single brand wink */
   .speech {
@@ -679,6 +710,12 @@
   <div class="banner-overlay">
     <h1 class="display">Er broeit iets bij <span class="red">Young Fenix.</span></h1>
     <p class="banner-sub">Onze site is in onderhoud. Geen paniek, de hulp gaat gewoon door. Aanmelden kan al, scrol naar beneden.</p>
+    <a class="banner-cta" href="#aanmelden">
+      Meld je aan
+      <svg viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M1 7h21M16 1l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/>
+      </svg>
+    </a>
   </div>
   <div class="speech">Soon</div>
 </section>
