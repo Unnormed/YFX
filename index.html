@@ -74,29 +74,6 @@
   }
 
   /* ───────── MARQUEE ───────── */
-  .marquee {
-    overflow: hidden;
-    background: var(--black);
-    border-bottom: 1px solid var(--red);
-  }
-  .marquee-inner {
-    display: inline-flex;
-    white-space: nowrap;
-    padding: 11px 0;
-    animation: scroll 42s linear infinite;
-    font-family: 'Anton', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-size: 13px;
-    color: var(--red);
-  }
-  .marquee-inner span { padding-right: 56px; }
-  .marquee-inner span:nth-child(even) { color: var(--cream); }
-  @keyframes scroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
-
   /* ───────── TOPBAR ───────── */
   .topbar {
     display: flex;
@@ -109,6 +86,14 @@
     font-size: 13px;
     position: relative;
     z-index: 5;
+    background:
+      linear-gradient(180deg,
+        var(--black) 0%,
+        var(--deep) 45%,
+        rgba(102,0,51,0.92) 85%,
+        rgba(102,0,51,0) 100%);
+    border-bottom: 1px solid rgba(255,51,0,0.25);
+    box-shadow: 0 6px 22px rgba(0,0,0,0.35);
   }
   .wordmark {
     color: var(--cream);
@@ -324,17 +309,6 @@
     object-fit: cover;
     display: block;
   }
-  .polaroid .label {
-    position: absolute;
-    bottom: 4px;
-    left: 0; right: 0;
-    text-align: center;
-    font-family: 'Caveat', cursive;
-    font-weight: 700;
-    font-size: 22px;
-    color: var(--burgundy);
-  }
-
   .polaroid-1 {
     top: 6%;
     right: -2%;
@@ -342,9 +316,9 @@
     transform: rotate(6deg);
   }
   .polaroid-1 .pic img {
-    object-position: 30% 50%;
+    object-position: 50% 50%;
+    width: 100%;
   }
-  .polaroid-1 .label { color: var(--red); }
 
   .polaroid-2 {
     bottom: -30px;
@@ -353,12 +327,19 @@
     transform: rotate(-7deg);
   }
   .polaroid-2 .pic img {
-    object-position: 75% 50%;
-    width: 240%;
+    object-position: 50% 50%;
+    width: 100%;
   }
 
   @media (max-width: 760px) {
-    .polaroid-1 { top: -20px; right: -10px; width: 130px; }
+    .polaroid-1 {
+      position: relative;
+      top: auto;
+      right: auto;
+      width: clamp(180px, 50vw, 260px);
+      margin: 0 auto 28px;
+      transform: rotate(-3deg);
+    }
     .polaroid-2 { display: none; }
   }
 
@@ -683,32 +664,18 @@
 </head>
 <body>
 
-<!-- MARQUEE -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-inner">
-    <span>Er broeit iets</span><span>✦</span>
-    <span>Site in onderhoud</span><span>✦</span>
-    <span>De hulp gaat door</span><span>✦</span>
-    <span>Aanmelden kan al</span><span>✦</span>
-    <span>Er broeit iets</span><span>✦</span>
-    <span>Site in onderhoud</span><span>✦</span>
-    <span>De hulp gaat door</span><span>✦</span>
-    <span>Aanmelden kan al</span><span>✦</span>
-  </div>
-</div>
-
 <!-- TOPBAR -->
 <div class="topbar">
   <span class="wordmark">Young Fenix</span>
   <span class="right">
     <span class="live-dot"></span>
-    <span>In opbouw / Brussel</span>
+    <span>In opbouw / Antwerpen</span>
   </span>
 </div>
 
 <!-- BANNER -->
 <section class="banner">
-  <img src="hero.jpg" alt="Groep jongeren op een Brussels dak">
+  <img src="hero.jpg" alt="Groep jongeren op een Antwerps dak">
   <div class="banner-overlay">
     <h1 class="display">Er broeit iets bij <span class="red">Young Fenix.</span></h1>
     <p class="banner-sub">Onze site is in onderhoud. Geen paniek, de hulp gaat gewoon door. Aanmelden kan al, scrol naar beneden.</p>
@@ -729,8 +696,7 @@
       <span class="scribble scribble-1 hand">soon...</span>
 
       <div class="polaroid polaroid-1">
-        <div class="pic"><img src="hero.jpg" alt=""></div>
-        <span class="label">crew</span>
+        <div class="pic"><img src="polaroid-1.png" alt=""></div>
       </div>
 
       <h2 class="display">Even <span class="red">geduld.</span></h2>
@@ -742,8 +708,7 @@
       <span class="scribble scribble-2 hand">★ on til.</span>
 
       <div class="polaroid polaroid-2">
-        <div class="pic"><img src="hero.jpg" alt=""></div>
-        <span class="label">brussel</span>
+        <div class="pic"><img src="polaroid-2.jpeg" alt=""></div>
       </div>
     </div>
 
@@ -817,6 +782,12 @@
             </svg>
             Facebook
           </a>
+          <a href="https://www.linkedin.com/company/young-fenix/?originalSubdomain=be" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
+            </svg>
+            LinkedIn
+          </a>
           <a href="mailto:hello@youngfenix.be">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect x="2" y="4" width="20" height="16" rx="2"/>
@@ -839,6 +810,7 @@
       <a href="mailto:hello@youngfenix.be">hello@youngfenix.be</a>
       <a href="https://www.instagram.com/youngfenix.be/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.facebook.com/people/Young-FENIX/100068055292621/" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.linkedin.com/company/young-fenix/?originalSubdomain=be" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </div>
 </footer>
