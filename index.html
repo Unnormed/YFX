@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Young Fenix · er broeit iets</title>
+<meta name="description" content="Er broeit iets bij Young Fenix. Onze site is in onderhoud. De hulp gaat door, aanmelden kan al.">
+<meta property="og:title" content="Er broeit iets bij Young Fenix">
+<meta property="og:description" content="Site in onderhoud. De hulp gaat door, aanmelden kan al.">
+<meta property="og:image" content="hero.jpg">
+<meta name="theme-color" content="#660033">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Figtree:wght@400;700;900&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    /* OFFICIAL YFX BRAND PALETTE (from brand guide page 42) */
+    --red:       #FF3300;  /* YFX RED - 50% */
+    --burgundy:  #660033;  /* YFX BURGUNDY - 20% */
+    --fire:      #FF9933;  /* YFX YELLOW/orange - 10% */
+    --mint:      #99FFCC;  /* YFX MINT - 5% */
+    --pine:      #003333;  /* YFX PINE - 5% */
+    --lila:      #9933CC;  /* YFX LILA - 5% */
+    --pink:      #FF99CC;  /* YFX BUBBLICIOUS - 5% */
+    /* support */
+    --cream:     #FFE8D0;
+    --cream-2:   #FFF6E0;
+    --deep:      #2A0014;
+    --black:     #0A0006;
+  }
+
+  *,*::before,*::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--burgundy);
+    color: var(--cream);
+    font-family: 'Figtree', system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* global film grain */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 200;
+    opacity: 0.08;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .display {
+    font-family: 'Anton', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 0.86;
+    letter-spacing: -0.005em;
+  }
+  .hand {
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+    line-height: 0.9;
+  }
+
+  /* ───────── MARQUEE ───────── */
+  .marquee {
+    overflow: hidden;
+    background: var(--black);
+    border-bottom: 1px solid var(--red);
+  }
+  .marquee-inner {
+    display: inline-flex;
+    white-space: nowrap;
+    padding: 11px 0;
+    animation: scroll 42s linear infinite;
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 13px;
+    color: var(--red);
+  }
+  .marquee-inner span { padding-right: 56px; }
+  .marquee-inner span:nth-child(even) { color: var(--cream); }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ───────── TOPBAR ───────── */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px clamp(20px, 4vw, 56px);
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 13px;
+    position: relative;
+    z-index: 5;
+  }
+  .wordmark {
+    color: var(--cream);
+    font-size: 17px;
+    letter-spacing: 0.04em;
+  }
+  .topbar .right {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--cream);
+    opacity: 0.75;
+  }
+  .live-dot {
+    width: 8px; height: 8px;
+    background: var(--red);
+    border-radius: 50%;
+    animation: blink 1.6s ease-in-out infinite;
+  }
+  @keyframes blink {
+    0%,100% { opacity: 1; }
+    50%     { opacity: 0.3; }
+  }
+
+  /* ───────── BANNER ───────── */
+  .banner {
+    position: relative;
+    width: 100%;
+    height: clamp(440px, 70vw, 760px);
+    overflow: hidden;
+  }
+  .banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .banner-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, rgba(102,0,51,0.15) 0%, rgba(102,0,51,0.05) 35%, rgba(102,0,51,0.95) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: clamp(28px, 5vw, 72px);
+  }
+  .banner h1 {
+    font-size: clamp(44px, 9vw, 160px);
+    color: var(--cream);
+    max-width: 14ch;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.2s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+  .banner h1 .red { color: var(--red); }
+  .banner h1 .fire { color: var(--fire); }
+  .banner-sub {
+    font-family: 'Figtree', sans-serif;
+    font-weight: 700;
+    font-size: clamp(15px, 1.4vw, 19px);
+    color: var(--cream);
+    margin-top: 22px;
+    max-width: 44ch;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.35s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+
+  /* lila speech bubble on banner - a single brand wink */
+  .speech {
+    position: absolute;
+    top: clamp(20px, 3vw, 56px);
+    right: clamp(20px, 3vw, 56px);
+    background: var(--lila);
+    color: var(--cream-2);
+    padding: 14px 20px;
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 14px;
+    transform: rotate(3deg);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.35);
+    z-index: 3;
+    opacity: 0;
+    animation: stickerIn 0.7s 0.6s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+  .speech::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 22px;
+    width: 0; height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid var(--lila);
+  }
+  @keyframes stickerIn {
+    from { opacity: 0; transform: rotate(8deg) translateY(-12px); }
+    to   { opacity: 1; transform: rotate(3deg) translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ───────── MAIN CANVAS ───────── */
+  main {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: clamp(60px, 8vw, 120px);
+  }
+
+  /* atmospheric red glows behind content (continuous canvas, no hard blocks) */
+  .glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .glow-1 {
+    top: 8%;
+    left: -15%;
+    width: 60%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, rgba(255,51,0,0.55), transparent 70%);
+  }
+  .glow-2 {
+    top: 38%;
+    right: -10%;
+    width: 50%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, rgba(255,153,51,0.30), transparent 70%);
+  }
+  .glow-3 {
+    bottom: 6%;
+    left: 30%;
+    width: 50%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, rgba(153,51,204,0.25), transparent 70%);
+  }
+
+  .canvas {
+    position: relative;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: clamp(60px, 9vw, 140px) clamp(20px, 4vw, 56px) 0;
+    z-index: 2;
+  }
+
+  /* ───────── TEASE BLOCK ───────── */
+  .tease {
+    position: relative;
+    text-align: center;
+    margin-bottom: clamp(80px, 10vw, 160px);
+  }
+  .tease h2 {
+    font-size: clamp(80px, 17vw, 280px);
+    color: var(--cream);
+    line-height: 0.85;
+    display: inline-block;
+    position: relative;
+  }
+  .tease h2 .red { color: var(--red); }
+  .tease h2 .fire { color: var(--fire); }
+
+  .scribble {
+    position: absolute;
+    pointer-events: none;
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+  }
+  .scribble-1 {
+    top: -42px;
+    left: 6%;
+    font-size: clamp(36px, 5vw, 64px);
+    transform: rotate(-10deg);
+    color: var(--fire);
+  }
+  .scribble-2 {
+    bottom: -34px;
+    right: 4%;
+    font-size: clamp(32px, 4.2vw, 56px);
+    transform: rotate(6deg);
+    color: var(--mint);
+  }
+  .tease-underline {
+    position: absolute;
+    bottom: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(180px, 30vw, 420px);
+    color: var(--red);
+  }
+
+  /* ───────── POLAROIDS ───────── */
+  .polaroid {
+    position: absolute;
+    background: var(--cream-2);
+    padding: 12px 12px 36px;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.45), 0 4px 8px rgba(0,0,0,0.25);
+    z-index: 4;
+  }
+  .polaroid .pic {
+    width: 100%;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    background: var(--burgundy);
+  }
+  .polaroid .pic img {
+    width: 220%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .polaroid .label {
+    position: absolute;
+    bottom: 4px;
+    left: 0; right: 0;
+    text-align: center;
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--burgundy);
+  }
+
+  .polaroid-1 {
+    top: 6%;
+    right: -2%;
+    width: clamp(140px, 16vw, 220px);
+    transform: rotate(6deg);
+  }
+  .polaroid-1 .pic img {
+    object-position: 30% 50%;
+  }
+  .polaroid-1 .label { color: var(--red); }
+
+  .polaroid-2 {
+    bottom: -30px;
+    left: -2%;
+    width: clamp(140px, 15vw, 200px);
+    transform: rotate(-7deg);
+  }
+  .polaroid-2 .pic img {
+    object-position: 75% 50%;
+    width: 240%;
+  }
+
+  @media (max-width: 760px) {
+    .polaroid-1 { top: -20px; right: -10px; width: 130px; }
+    .polaroid-2 { display: none; }
+  }
+
+  /* ───────── ABOUT CARD ───────── */
+  .about-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-bottom: clamp(80px, 10vw, 160px);
+  }
+  .about-card {
+    background: var(--cream-2);
+    color: var(--burgundy);
+    padding: clamp(36px, 4vw, 56px) clamp(28px, 4vw, 56px) clamp(36px, 4vw, 52px);
+    max-width: 660px;
+    transform: rotate(-1.2deg);
+    box-shadow: 0 28px 70px rgba(0,0,0,0.45), 0 6px 14px rgba(0,0,0,0.25);
+    position: relative;
+  }
+  /* tape strip */
+  .about-card::before {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    width: 130px;
+    height: 28px;
+    background: rgba(255,153,51,0.8);
+    transform: translateX(-50%) rotate(-2deg);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.18);
+  }
+  .about-card .label {
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 12px;
+    color: var(--red);
+    margin-bottom: 18px;
+  }
+  .about-card h3 {
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    font-size: clamp(30px, 4vw, 50px);
+    line-height: 0.95;
+    color: var(--burgundy);
+    margin-bottom: 22px;
+  }
+  .about-card h3 .red { color: var(--red); }
+  .about-card p {
+    font-size: clamp(15px, 1.2vw, 17px);
+    line-height: 1.55;
+    color: var(--burgundy);
+    max-width: 56ch;
+    font-weight: 400;
+  }
+  .about-card p + p { margin-top: 14px; }
+  .about-scribble {
+    position: absolute;
+    bottom: -42px;
+    right: -10px;
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+    font-size: 38px;
+    color: var(--mint);
+    transform: rotate(-8deg);
+  }
+
+  /* ───────── CTA ───────── */
+  .cta {
+    position: relative;
+    text-align: center;
+  }
+  .cta-head {
+    margin-bottom: clamp(48px, 6vw, 96px);
+    position: relative;
+    display: inline-block;
+  }
+  .cta-head h2 {
+    font-size: clamp(60px, 11vw, 180px);
+    color: var(--cream);
+    line-height: 0.85;
+  }
+  .cta-head h2 .red { color: var(--red); }
+  .cta-helper {
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+    font-size: clamp(24px, 2.6vw, 36px);
+    color: var(--fire);
+    transform: rotate(-4deg);
+    display: inline-block;
+    margin-top: 18px;
+  }
+
+  .cta-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(28px, 3vw, 44px);
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  @media (min-width: 780px) {
+    .cta-cards { grid-template-columns: 1fr 1fr; }
+  }
+
+  .cta-card {
+    position: relative;
+    background: var(--cream-2);
+    color: var(--burgundy);
+    padding: clamp(32px, 3vw, 44px) clamp(28px, 3vw, 40px);
+    text-align: left;
+    transition: transform 0.4s cubic-bezier(.2,.7,.2,1), box-shadow 0.4s ease, background 0.4s ease;
+    box-shadow: 0 24px 50px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    min-height: 320px;
+  }
+  .cta-card:nth-child(1) { transform: rotate(-1.5deg); }
+  .cta-card:nth-child(2) {
+    transform: rotate(1.5deg);
+    background: var(--lila);
+    color: var(--cream);
+  }
+
+  .cta-card:hover {
+    transform: rotate(0) translateY(-6px);
+    box-shadow: 0 36px 70px rgba(0,0,0,0.55);
+  }
+  .cta-card:nth-child(1):hover { background: var(--red); color: var(--cream); }
+  .cta-card:nth-child(2):hover { background: var(--fire); color: var(--burgundy); }
+
+  /* tape on each card */
+  .cta-card::before {
+    content: "";
+    position: absolute;
+    top: -12px;
+    left: 28px;
+    width: 80px; height: 22px;
+    background: rgba(153,255,204,0.75);
+    transform: rotate(-5deg);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  }
+  .cta-card:nth-child(2)::before {
+    left: auto;
+    right: 28px;
+    transform: rotate(5deg);
+    background: rgba(255,153,204,0.85);
+  }
+
+  .cta-card .num {
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 12px;
+    color: var(--red);
+    margin-bottom: 22px;
+    transition: color 0.3s ease;
+  }
+  .cta-card:nth-child(2) .num { color: var(--cream-2); }
+  .cta-card:nth-child(1):hover .num { color: var(--cream); }
+  .cta-card:nth-child(2):hover .num { color: var(--burgundy); }
+
+  .cta-card .title {
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    font-size: clamp(34px, 3.6vw, 50px);
+    line-height: 0.9;
+    margin-bottom: 18px;
+  }
+
+  .cta-card .desc {
+    font-size: 15px;
+    line-height: 1.5;
+    opacity: 0.9;
+    margin-bottom: 28px;
+    max-width: 36ch;
+  }
+
+  .cta-card .go {
+    margin-top: auto;
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    transition: gap 0.3s ease;
+    align-self: flex-start;
+    border-bottom: 2px solid currentColor;
+    padding-bottom: 4px;
+  }
+  .cta-card .go svg { transition: transform 0.3s ease; }
+  .cta-card:hover .go { gap: 18px; }
+  .cta-card:hover .go svg { transform: translateX(4px); }
+
+  /* ───────── FOOTER ───────── */
+  footer {
+    background: var(--black);
+    color: var(--cream);
+    padding: 40px clamp(20px, 4vw, 56px);
+    border-top: 1px solid rgba(255,51,0,0.25);
+    position: relative;
+    z-index: 5;
+  }
+  .footer-wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 12px;
+  }
+  .footer-wrap a { transition: color 0.2s; opacity: 0.7; }
+  .footer-wrap a:hover { color: var(--red); opacity: 1; }
+  .footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
+
+  /* ───────── RESPONSIVE ───────── */
+  @media (max-width: 700px) {
+    .banner h1 { font-size: 14vw; }
+    .tease h2 { font-size: 22vw; }
+    .cta-head h2 { font-size: 18vw; }
+    .about-card { transform: rotate(-1deg); }
+    .scribble-1 { left: 2%; }
+    .scribble-2 { right: 2%; }
+    .speech { font-size: 12px; padding: 10px 14px; top: 14px; right: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-inner">
+    <span>Er broeit iets</span><span>✦</span>
+    <span>Site in onderhoud</span><span>✦</span>
+    <span>De hulp gaat door</span><span>✦</span>
+    <span>Aanmelden kan al</span><span>✦</span>
+    <span>Er broeit iets</span><span>✦</span>
+    <span>Site in onderhoud</span><span>✦</span>
+    <span>De hulp gaat door</span><span>✦</span>
+    <span>Aanmelden kan al</span><span>✦</span>
+  </div>
+</div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <span class="wordmark">Young Fenix</span>
+  <span class="right">
+    <span class="live-dot"></span>
+    <span>In opbouw / Brussel</span>
+  </span>
+</div>
+
+<!-- BANNER -->
+<section class="banner">
+  <img src="hero.jpg" alt="Groep jongeren op een Brussels dak">
+  <div class="banner-overlay">
+    <h1 class="display">Er broeit iets bij <span class="red">Young Fenix.</span></h1>
+    <p class="banner-sub">Onze site is in onderhoud. Geen paniek, de hulp gaat gewoon door. Aanmelden kan al, scrol naar beneden.</p>
+  </div>
+  <div class="speech">Soon</div>
+</section>
+
+<!-- MAIN CANVAS -->
+<main>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+  <div class="glow glow-3"></div>
+
+  <div class="canvas">
+
+    <!-- TEASE -->
+    <div class="tease">
+      <span class="scribble scribble-1 hand">soon...</span>
+
+      <div class="polaroid polaroid-1">
+        <div class="pic"><img src="hero.jpg" alt=""></div>
+        <span class="label">crew</span>
+      </div>
+
+      <h2 class="display">Even <span class="red">geduld.</span></h2>
+
+      <svg class="tease-underline" viewBox="0 0 400 20" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M2 12 C 60 4, 120 18, 180 10 S 300 4, 398 14" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+
+      <span class="scribble scribble-2 hand">★ on til.</span>
+
+      <div class="polaroid polaroid-2">
+        <div class="pic"><img src="hero.jpg" alt=""></div>
+        <span class="label">brussel</span>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="about-wrap">
+      <div class="about-card">
+        <span class="label">Wat is Young Fenix?</span>
+        <h3>Wij zijn er voor <span class="red">elke jongere.</span></h3>
+        <p>Young Fenix is de hulplijn van alle jongeren. Wat je gender, huidskleur, geloofsovertuiging of seksuele oriëntatie ook mag zijn. Op ons kan je rekenen.</p>
+        <p>Wij willen het stigma rond mentale gezondheid doorbreken. Van het pleintje tot het klaslokaal tot de woonkamer.</p>
+        <span class="about-scribble">x</span>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta" id="aanmelden">
+      <div class="cta-head">
+        <h2 class="display">Meld je <span class="red">aan.</span></h2>
+        <div class="cta-helper">kies wat bij je past</div>
+      </div>
+
+      <div class="cta-cards">
+        <a class="cta-card"
+           href="https://forms.gle/yGmudq6JFGH2tvPSA"
+           target="_blank" rel="noopener">
+          <span class="num">01 / Voor jongeren</span>
+          <span class="title">Zit je<br>ergens<br>mee?</span>
+          <p class="desc">Praten lucht op. Vul het formulier in, en we nemen snel contact met je op.</p>
+          <span class="go">
+            Start een traject
+            <svg width="24" height="14" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M1 7h21M16 1l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/>
+            </svg>
+          </span>
+        </a>
+
+        <a class="cta-card"
+           href="https://forms.gle/vgAjSA3GjYtgSNo27"
+           target="_blank" rel="noopener">
+          <span class="num">02 / Voor verwijzers</span>
+          <span class="title">Iemand<br>aan-<br>melden?</span>
+          <p class="desc">Ben jij een professionele verwijzer? Gebruik dit formulier om iemand bij ons aan te melden.</p>
+          <span class="go">
+            Open formulier
+            <svg width="24" height="14" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M1 7h21M16 1l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-wrap">
+    <span>© Young Fenix · 2026</span>
+    <div class="footer-links">
+      <a href="mailto:hello@youngfenix.be">hello@youngfenix.be</a>
+      <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://tiktok.com/" target="_blank" rel="noopener">TikTok</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(el => {
+    el.addEventListener('click', e => {
+      const id = el.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
